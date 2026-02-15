@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Legacy CSS from the Vite build (kept to preserve exact look quickly). */
+@import "./legacy.css";
+
+/* Small Next-safe defaults */
+html, body { height: 100%; }

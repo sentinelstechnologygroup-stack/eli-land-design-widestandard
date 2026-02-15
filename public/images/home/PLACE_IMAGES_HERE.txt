@@ -1,0 +1,2 @@
+Add: design.jpg, construction.jpg, projects.jpg, about.jpg
+Path: public/images/home/

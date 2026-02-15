@@ -1,0 +1,15 @@
+{
+  "/robots.txt/route": "app/robots.txt/route.js",
+  "/sitemap.xml/route": "app/sitemap.xml/route.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/page": "app/page.js",
+  "/careers-at-eli/page": "app/careers-at-eli/page.js",
+  "/about/page": "app/about/page.js",
+  "/construction/page": "app/construction/page.js",
+  "/contact-us/page": "app/contact-us/page.js",
+  "/guiding-ideas/page": "app/guiding-ideas/page.js",
+  "/design/page": "app/design/page.js",
+  "/testimonials/page": "app/testimonials/page.js",
+  "/projects/page": "app/projects/page.js",
+  "/projects/[slug]/page": "app/projects/[slug]/page.js"
+}
