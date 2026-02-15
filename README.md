@@ -38,3 +38,4 @@ Place assets in:
 - `public/images/home/*`
 - `public/images/projects/<slug>/*`
 
+"# ELI-Land-Design-WideStandard" 
