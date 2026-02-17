@@ -1,0 +1,155 @@
+@charset "UTF-8";
+/*
+Theme Name: Eli
+Theme URI: https://github.com/WordPress/twentynineteen
+Author: the WordPress team
+Author URI: https://wordpress.org/
+Description: A new Gutenberg-ready theme.
+Requires at least: WordPress 4.9.6
+Version: 1.0
+License: GNU General Public License v2 or later
+License URI: LICENSE
+Text Domain: twentynineteen
+Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready
+
+This theme, like WordPress, is licensed under the GPL.
+Use it to make something cool, have fun, and share what you've learned with others.
+
+Twenty Nineteen is based on Underscores https://underscores.me/, (C) 2012-2018 Automattic, Inc.
+Underscores is distributed under the terms of the GNU GPL v2 or later.
+
+Normalizing styles have been helped along thanks to the fine work of
+Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
+*/
+/*--------------------------------------------------------------
+>>> TABLE OF CONTENTS:
+----------------------------------------------------------------
+# Variables
+# Normalize
+# Typography
+  ## Headings
+  ## Copy
+# Elements
+  ## Lists
+  ## Tables
+# Forms
+  ## Buttons
+  ## Fields
+# Navigation
+  ## Links
+  ## Menus
+  ## Next & Previous
+# Accessibility
+# Alignments
+# Clearings
+# Layout
+# Widgets
+# Content
+  ## Archives
+  ## Posts and pages
+  ## Comments
+# Blocks
+# Media
+  ## Captions
+  ## Galleries
+--------------------------------------------------------------*/
+/*
+ * Chrome renders extra-wide &nbsp; characters for the Hoefler Text font.
+ * This results in a jumping cursor when typing in both the Classic and block
+ * editors. The following font-face override fixes the issue by manually inserting
+ * a custom font that includes just a Hoefler Text space replacement for that
+ * character instead.
+ */
+
+.navbar-nav > li {
+    list-style-type: none;
+    vertical-align: top;
+}
+.dp-navbar .navbar-nav > li > a {
+    margin-left: 4px;
+}
+
+.dp-navbar .navbar-nav > li span.submenu-expand {
+    position: absolute;
+    right: 0;
+    font-size: 9px;
+    top: 5px;
+}
+.dp-navbar .navbar-nav > li span.submenu-expand svg {
+    fill: #fff;
+    width: 16px;
+    height: 16px;
+    vertical-align: sub;
+}
+.dp-navbar .navbar-nav > li.active a, .dp-navbar .navbar-nav > li.active a:focus{
+    background-color: rgba(0,94,163,0.7) !important;
+}
+.dp-navbar .navbar-nav > li .mobile-parent-nav-menu-item{
+  display: none;
+}
+.main-menu-more{
+  display: none;
+}
+
+.dp-cons-main-inr .dp-cons-main-inr-img img{
+    width: 100%;
+}
+.masonry-column-custom{
+    width: 100%;
+}
+
+
+.masonry-grid .row {  
+ -moz-column-width: 30em;
+ -webkit-column-width: 30em;
+  column-width: 30em;
+ -moz-column-gap: 1em;
+ -webkit-column-gap: 1em; 
+  column-gap: 1em;  
+}
+
+.masonry-grid .item {
+ display: inline-block;
+ padding:  .25rem;
+ width:  100%; 
+}
+
+.masonry-grid .well {
+    position: relative;
+    display: block;
+    padding: 0;
+}
+.dp-cons-main {
+    padding: 70px 0;
+}
+.dp-navbar .navbar-nav > li.active {
+    background: none !important;
+}
+
+
+
+.carousel-fade .carousel-inner .item {
+  opacity: 0;
+  -webkit-transition-property: opacity;
+  -moz-transition-property: opacity;
+  -o-transition-property: opacity;
+  transition-property: opacity;
+}
+.carousel-fade .carousel-inner .active {
+  opacity: 1;
+}
+.carousel-fade .carousel-inner .active.left,
+.carousel-fade .carousel-inner .active.right {
+  left: 0;
+  opacity: 0;
+  z-index: 1;
+}
+.carousel-fade .carousel-inner .next.left,
+.carousel-fade .carousel-inner .prev.right {
+  opacity: 1;
+}
+.carousel-fade .carousel-control {
+  z-index: 2;
+}
+.dp-banner .carousel-inner{min-height: 694px;}
+.dp-banner .carousel-caption{bottom: -55px;}
