@@ -4,18 +4,15 @@ import PageShell from "@/components/PageShell";
 import ClientImg from "@/components/ClientImg";
 import StandardBottomCTA from "@/components/StandardBottomCTA";
 
-/**
- * MEDIA STANDARD (LOCKED)
- * - Disk: public/images/<scope>/<name>.jpg
- * - Ref:  "/images/<scope>/<name>.jpg"   (NEVER "public/...")
- * - All media refs live here at top of page.
- */
 const MEDIA = {
   images: {
+    // ✅ MUST EXIST in /public/images/home/
     design: "/images/home/design.jpg",
     construction: "/images/home/construction.jpg",
-    projects: "/images/home/projects.jpg",
-    about: "/images/home/about.jpg",
+
+    // ✅ Match your actual filenames shown in Explorer:
+    projects: "/images/home/project-1.jpg",
+    about: "/images/home/about-1.jpg",
   },
 } as const;
 
@@ -28,14 +25,7 @@ type BandProps = {
   tone?: "light" | "dark";
 };
 
-function Band({
-  title,
-  subtitle,
-  cta,
-  href,
-  image,
-  tone = "light",
-}: BandProps) {
+function Band({ title, subtitle, cta, href, image, tone = "light" }: BandProps) {
   return (
     <Link href={href} className={`eliBand eliBand--${tone}`} aria-label={title}>
       <div className="eliBand__imgWrap">
@@ -86,10 +76,9 @@ export default function HomePage() {
               BUILT WITH INTENTION.
             </h1>
             <p className="eliTopRow__p">
-              We create inspired outdoor environments grounded in informed design and executed
-              with meticulous attention to detail. Every ELI space is shaped by its unique
-              context—crafting timeless, enduring places that harmonize with their natural and
-              built surroundings.
+              We create inspired outdoor environments grounded in informed design and executed with meticulous
+              attention to detail. Every ELI space is shaped by its unique context—crafting timeless, enduring
+              places that harmonize with their natural and built surroundings.
             </p>
           </div>
         </PageShell>
@@ -152,21 +141,15 @@ export default function HomePage() {
             <div className="eliAboutRow__left">
               <div className="eliSectionHead__title">ABOUT ELI</div>
               <div className="eliAboutCard">
-                <ClientImg
-                  className="eliAboutCard__img"
-                  src={MEDIA.images.about}
-                  alt=""
-                  loading="lazy"
-                />
+                <ClientImg className="eliAboutCard__img" src={MEDIA.images.about} alt="" loading="lazy" />
               </div>
             </div>
 
             <div className="eliAboutRow__right">
               <div className="eliAboutText__title">ABOUT ELI</div>
               <p className="eliAboutText__p">
-                More than by roots alone, we shape land with purpose. We provide preconstruction
-                planning, design development, and disciplined execution—delivering environments
-                built to last.
+                More than by roots alone, we shape land with purpose. We provide preconstruction planning,
+                design development, and disciplined execution—delivering environments built to last.
               </p>
               <Link className="eliAboutText__link" href="/about">
                 → Learn More
@@ -176,7 +159,6 @@ export default function HomePage() {
         </PageShell>
       </section>
 
-      {/* STANDARD BOTTOM CTA (shared) */}
       <StandardBottomCTA />
     </main>
   );
