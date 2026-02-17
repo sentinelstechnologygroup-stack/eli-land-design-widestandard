@@ -1,29 +1,9 @@
-// src/pages/About.jsx
-import React from "react";
+// src/app/about/page.tsx
 import StandardBottomCTA from "@/components/StandardBottomCTA";
 
 /**
  * ABOUT — MUST MATCH HOME (Editorial / Warm-Light)
  * ✅ Local-only assets (public/)
- * ❗ BUILD THESE FILES (place in /public):
- *
- * Images:
- * - /public/images/about/hero.jpg                      (optional; used as a subtle header image)
- * - /public/images/about/about-main.jpg
- * - /public/images/about/team-chris.jpg
- * - /public/images/about/team-matt.jpg
- * - /public/images/about/project-woodhaven.png
- * - /public/images/about/project-vargos.png
- * - /public/images/about/project-southfork.png
- * - /public/images/about/project-tenoaks.png
- * - /public/images/about/brochure-cover.jpg
- *
- * Downloads (PDFs):
- * - /public/projects/downloads/woodhaven-village.pdf
- * - /public/projects/downloads/vargos.pdf
- * - /public/projects/downloads/southfork.pdf
- * - /public/projects/downloads/ten-oaks.pdf
- * - /public/projects/downloads/eli-land-design-brochure.pdf
  */
 
 const ASSETS = {
@@ -32,24 +12,23 @@ const ASSETS = {
   teamChris: "/images/about/team-chris.jpg",
   teamMatt: "/images/about/team-matt.jpg",
 
+  // NOTE: Make sure these filenames match what exists in /public/images/about/
   woodhavenThumb: "/images/about/project-woodhaven.jpg",
   vargosThumb: "/images/about/project-vargos.jpg",
   southforkThumb: "/images/about/project-southfork.jpg",
   tenOaksThumb: "/images/about/project-tenoaks.jpg",
   brochureCover: "/images/about/brochure-cover.jpg",
-};
+} as const;
 
 const DOWNLOADS = {
-  // ✅ NEVER prefix with /public in hrefs. public/ is web root.
   woodhaven: "/projects/downloads/woodhaven-village.pdf",
   vargos: "/projects/downloads/vargos.pdf",
   southfork: "/projects/downloads/southfork.pdf",
   tenOaks: "/projects/downloads/ten-oaks.pdf",
   brochure: "/projects/downloads/eli-land-design-brochure.pdf",
-};
+} as const;
 
 // Home-aligned editorial tokens (warm-light, thin borders, minimal elevation)
-// ✅ CORNER RADIUS STANDARD = SQUARED (no rounded-* anywhere in this file)
 const page = "bg-[#F5F1EA] text-[#151515]";
 const wrap = "mx-auto w-full max-w-6xl px-4";
 const section = "py-10 md:py-14";
@@ -65,7 +44,12 @@ const h2 = "text-2xl md:text-3xl font-semibold tracking-tight";
 const h3 = "text-lg md:text-xl font-semibold tracking-tight";
 const body = "text-[15px] md:text-base leading-relaxed text-black/75";
 
-function Strip({ label, imageSrc }) {
+type StripProps = {
+  label: string;
+  imageSrc: string;
+};
+
+function Strip({ label, imageSrc }: StripProps) {
   return (
     <div className="relative overflow-hidden border border-black/10">
       <img
@@ -76,7 +60,7 @@ function Strip({ label, imageSrc }) {
       />
       <div className="absolute inset-0 bg-black/35" />
       <div className="absolute inset-0 flex items-center">
-        <div className={`${wrap}`}>
+        <div className="mx-auto w-full max-w-6xl px-4">
           <div className="inline-flex items-center gap-3">
             <div className="h-7 w-[3px] bg-white/80" />
             <div className="text-white">
@@ -92,7 +76,12 @@ function Strip({ label, imageSrc }) {
   );
 }
 
-function DownloadRow({ title, href }) {
+type DownloadRowProps = {
+  title: string;
+  href: string;
+};
+
+function DownloadRow({ title, href }: DownloadRowProps) {
   return (
     <a
       href={href}
@@ -112,7 +101,7 @@ function DownloadRow({ title, href }) {
 export default function About() {
   return (
     <div className={page}>
-      {/* TOP HEADER (same vibe as Home: big headline on warm canvas) */}
+      {/* TOP HEADER */}
       <div className={`${wrap} ${section}`}>
         <div className="max-w-3xl">
           <div className={kicker}>About ELI</div>
@@ -127,7 +116,6 @@ export default function About() {
           </p>
         </div>
 
-        {/* Optional subtle header image (kept restrained, like Home strips) */}
         <div className="mt-8">
           <div className="overflow-hidden border border-black/10 bg-white/40">
             <img
@@ -142,7 +130,7 @@ export default function About() {
 
       <div className={rule} />
 
-      {/* STRIPS (match Home’s “Design / Construction” visual rhythm) */}
+      {/* STRIPS */}
       <div className={`${wrap} ${section} space-y-4`}>
         <Strip label="Design" imageSrc={ASSETS.aboutMain} />
         <Strip label="Construction" imageSrc={ASSETS.aboutMain} />
@@ -150,7 +138,7 @@ export default function About() {
 
       <div className={rule} />
 
-      {/* ABOUT BLOCK (Home-style: light card, image + text) */}
+      {/* ABOUT BLOCK */}
       <div className={`${wrap} ${section}`}>
         <div className={`${card} overflow-hidden`}>
           <div className="grid gap-0 md:grid-cols-12">
@@ -207,7 +195,7 @@ export default function About() {
 
       <div className={rule} />
 
-      {/* TEAM (Home-style: clean blocks, minimal framing) */}
+      {/* TEAM */}
       <div className={`${wrap} ${section}`}>
         <div className="max-w-3xl">
           <div className={kicker}>Our team</div>
@@ -219,7 +207,6 @@ export default function About() {
         </div>
 
         <div className="mt-8 space-y-6">
-          {/* Chris */}
           <div className={`${card} overflow-hidden`}>
             <div className="grid gap-0 md:grid-cols-12">
               <div className="md:col-span-5">
@@ -240,10 +227,7 @@ export default function About() {
                 </p>
                 <p className={`${body} mt-4`}>
                   Contact:{" "}
-                  <a
-                    className="underline text-black/80 hover:text-black"
-                    href="mailto:chris@elilanddesign.com"
-                  >
+                  <a className="underline text-black/80 hover:text-black" href="mailto:chris@elilanddesign.com">
                     chris@elilanddesign.com
                   </a>
                 </p>
@@ -251,7 +235,6 @@ export default function About() {
             </div>
           </div>
 
-          {/* Matt */}
           <div className={`${card} overflow-hidden`}>
             <div className="grid gap-0 md:grid-cols-12">
               <div className="md:col-span-5 md:order-2">
@@ -267,8 +250,7 @@ export default function About() {
                 <h3 className={`${h3} mt-2`}>Matt Louderback, RLA</h3>
                 <p className={`${body} mt-4`}>
                   Matt joined E.L.I. land design in 2012 and supports the full project lifecycle —
-                  design, documentation, and visual communication that helps clients and builders
-                  align.
+                  design, documentation, and visual communication that helps clients and builders align.
                 </p>
               </div>
             </div>
@@ -278,15 +260,14 @@ export default function About() {
 
       <div className={rule} />
 
-      {/* DOWNLOADS (Home-style: quiet list, not dark tiles) */}
+      {/* DOWNLOADS */}
       <div className={`${wrap} ${section}`}>
         <div className="grid gap-8 md:grid-cols-12">
           <div className="md:col-span-5">
             <div className={kicker}>Downloads</div>
             <h2 className={`${h2} mt-2`}>Project pages and brochure</h2>
             <p className={`${body} mt-3`}>
-              Local PDFs packaged with this build. If any link 404s, BUILD IT by adding the file to
-              <span className="font-semibold"> /public/downloads</span>.
+              Local PDFs packaged with this build.
             </p>
           </div>
 
@@ -304,7 +285,6 @@ export default function About() {
 
       <div className={rule} />
 
-      {/* STANDARD BOTTOM CTA (shared) */}
       <StandardBottomCTA />
     </div>
   );
