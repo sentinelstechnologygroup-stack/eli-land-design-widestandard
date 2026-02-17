@@ -1,3 +1,4 @@
+/* location: src/app/globals.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -6,4 +7,199 @@
 @import "./legacy.css";
 
 /* Small Next-safe defaults */
-html, body { height: 100%; }
+html,
+body {
+  height: 100%;
+}
+
+/* =========================================
+   FIX: TEXT "HIGHLIGHT BLOCKS"
+   - Prevent ugly gray selection blocks
+   - Reset <mark> just in case
+   ========================================= */
+
+/* If this is actual text selection, make it subtle and on-brand */
+::selection {
+  background: rgba(0, 0, 0, 0.12);
+  color: inherit;
+}
+::-moz-selection {
+  background: rgba(0, 0, 0, 0.12);
+  color: inherit;
+}
+
+/* If those blocks are <mark> styling bleeding in, neutralize */
+mark {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+/* =========================================
+   ELI FOOTER STYLES (global)
+   Footer lives in SiteFooter component,
+   styles live here (per current project setup)
+   ========================================= */
+.eliSiteFooter {
+  background: var(--bg);
+  color: var(--ink);
+  padding: 22px 0 26px;
+}
+
+.eliSiteFooter__inner {
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding: 0 var(--page-pad);
+}
+
+.eliSiteFooter__inner::before {
+  content: "";
+  display: block;
+  border-top: 1px solid rgba(0, 0, 0, 0.10);
+  margin-bottom: 18px;
+}
+
+.eliSiteFooter__grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr;
+  gap: 34px;
+  align-items: start;
+}
+
+.eliSiteFooter__heading {
+  margin: 0 0 10px;
+  font-size: 12px;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.70);
+  font-weight: 600;
+}
+
+.eliSiteFooter__text {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.7;
+  color: rgba(0, 0, 0, 0.60);
+  max-width: 70ch;
+}
+
+.eliSiteFooter__linkGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+}
+
+.eliSiteFooter__linkGrid ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.eliSiteFooter__linkGrid li {
+  margin: 0 0 10px;
+}
+
+.eliSiteFooter__linkGrid a {
+  text-decoration: none;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.60);
+}
+
+.eliSiteFooter__linkGrid a:hover {
+  color: rgba(0, 0, 0, 0.82);
+}
+
+.eliSiteFooter__contactBlock {
+  font-size: 12px;
+  line-height: 1.7;
+  color: rgba(0, 0, 0, 0.60);
+}
+
+.eliSiteFooter__contactLine {
+  margin: 0 0 10px;
+}
+
+.eliSiteFooter__contactLine a {
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.eliSiteFooter__contactLine a:hover {
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.eliSiteFooter__copyrightSection {
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(0, 0, 0, 0.10);
+}
+
+.eliSiteFooter__copyrightRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  font-size: 11px;
+  color: rgba(0, 0, 0, 0.55);
+}
+
+.eliSiteFooter__copyrightRight a {
+  color: rgba(0,  0, 0, 0.58);
+  text-decoration: none;
+}
+
+.eliSiteFooter__copyrightRight a:hover {
+  color: rgba(0, 0, 0, 0.80);
+}
+
+@media (max-width: 980px) {
+  .eliSiteFooter__grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .eliSiteFooter__linkGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .eliSiteFooter__copyrightRow {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 520px) {
+  .eliSiteFooter__linkGrid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
+
+/* =========================================
+   REMOVE SECTION BREAK LINES (global)
+   ========================================= */
+
+/* Kill real HRs */
+hr {
+  display: none !important;
+  border: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Remove border separators on common wrappers (without killing card borders) */
+.eliSectionHead,
+.eliProject__wrap,
+.eliHomeWide__section,
+.eliHomeWide__band {
+  border-top: none !important;
+  border-bottom: none !important;
+}
+
+/* If pages used Tailwind "border-t border-black/10" dividers, kill them inside page body */
+.eliPage .border-t.border-black\/10 {
+  border-top: 0 !important;
+}

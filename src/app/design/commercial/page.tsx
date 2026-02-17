@@ -15,15 +15,8 @@ const surface =
   "bg-black/[0.02] ring-1 ring-black/10 shadow-[0_18px_55px_-40px_rgba(0,0,0,0.22)]";
 const chip =
   "inline-flex items-center gap-2 text-[11px] tracking-[0.35em] uppercase text-black/60";
-const h1 =
-  "text-3xl md:text-5xl font-semibold tracking-tight text-black/90";
-const lead =
-  "text-sm md:text-[15px] leading-relaxed text-black/70";
-
-const cardBase =
-  "group relative overflow-hidden ring-1 ring-black/10 bg-white/60";
-const cardFooter =
-  "px-6 py-4 md:px-7 md:py-5 border-t border-black/10 flex items-center justify-between";
+const h1 = "text-3xl md:text-5xl font-semibold tracking-tight text-black/90";
+const lead = "text-sm md:text-[15px] leading-relaxed text-black/70";
 
 function CategoryCard({
   title,
@@ -39,37 +32,35 @@ function CategoryCard({
   blurb: string;
 }) {
   return (
-    <Link href={href} className={`${cardBase} block`}>
-      <div className="relative h-[220px] md:h-[260px]">
+    <Link href={href} className="group block ring-1 ring-black/10 bg-white">
+      {/* Image */}
+      <div className="relative h-[220px] md:h-[260px] overflow-hidden">
         <Image
           src={imageSrc}
           alt={`${title} preview`}
           fill
-          className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+          className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/10 to-black/40" />
-        <div className="absolute left-5 top-5 md:left-6 md:top-6">
-          <span className="bg-white/75 text-black/70 text-[11px] tracking-[0.32em] uppercase px-2 py-1 ring-1 ring-black/10">
-            {note}
-          </span>
-        </div>
-
-        <div className="absolute inset-x-0 bottom-0 p-6 md:p-7">
-          <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-white">
-            {title}
-          </h2>
-          <p className="mt-2 max-w-[58ch] text-sm md:text-[14px] leading-relaxed text-white/90">
-            {blurb}
-          </p>
-        </div>
+        {/* Subtle image overlay only (no text here) */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/0 via-black/0 to-black/20" />
       </div>
 
-      <div className={cardFooter}>
-        <div className="text-[11px] tracking-[0.22em] uppercase text-black/55">
-          Gallery
+      {/* Text (LIGHT SAFE) */}
+      <div className="p-6 md:p-7 border-t border-black/10">
+        <div className="text-[11px] tracking-[0.32em] uppercase text-black/55">
+          {note}
         </div>
-        <div className="text-sm font-semibold text-black/80 underline underline-offset-4">
+
+        <h2 className="mt-3 text-2xl md:text-3xl font-semibold tracking-tight text-black/90">
+          {title}
+        </h2>
+
+        <p className="mt-3 text-sm md:text-[14px] leading-relaxed text-black/70">
+          {blurb}
+        </p>
+
+        <div className="mt-5 text-sm font-semibold text-black/80 underline underline-offset-4">
           Explore →
         </div>
       </div>
@@ -88,15 +79,14 @@ export default function CommercialDesignPage() {
           <div className="mt-3 grid gap-8 md:grid-cols-12 md:items-end">
             <div className="md:col-span-7">
               <h1 className={h1}>Commercial Design</h1>
+
               <p className={`mt-5 ${lead}`}>
                 Landscape architecture for commercial environments—focused on{" "}
                 <span className="font-semibold text-black/80">
                   circulation, grading, materials,
                 </span>{" "}
                 and{" "}
-                <span className="font-semibold text-black/80">
-                  planted systems
-                </span>{" "}
+                <span className="font-semibold text-black/80">planted systems</span>{" "}
                 that perform across schedule, maintenance, and budget constraints.
               </p>
 
@@ -110,7 +100,7 @@ export default function CommercialDesignPage() {
                 ].map((t) => (
                   <span
                     key={t}
-                    className="text-xs text-black/70 bg-white/60 ring-1 ring-black/10 px-3 py-1"
+                    className="text-xs text-black/70 bg-white ring-1 ring-black/10 px-3 py-1"
                   >
                     {t}
                   </span>
@@ -118,9 +108,9 @@ export default function CommercialDesignPage() {
               </div>
             </div>
 
-            {/* Hero image to break monotony */}
+            {/* Hero image */}
             <div className="md:col-span-5">
-              <div className="relative h-[220px] md:h-[260px] ring-1 ring-black/10 overflow-hidden bg-white/60">
+              <div className="relative h-[220px] md:h-[260px] ring-1 ring-black/10 overflow-hidden bg-white">
                 <Image
                   src="/images/design/commercial/commercial-panel.png"
                   alt="Commercial design hero"
@@ -134,7 +124,7 @@ export default function CommercialDesignPage() {
           </div>
         </header>
 
-        {/* CATEGORY GRID (this is the main fix) */}
+        {/* CATEGORY GRID */}
         <section className="mt-10">
           <div className="flex items-end justify-between gap-6">
             <div>
@@ -150,7 +140,7 @@ export default function CommercialDesignPage() {
               href="/projects"
               className="hidden md:inline-flex items-center gap-2 text-sm font-semibold text-black/70 underline underline-offset-4"
             >
-              View built work → 
+              View built work →
             </Link>
           </div>
 
@@ -195,8 +185,8 @@ export default function CommercialDesignPage() {
           </div>
         </section>
 
-        {/* FEATURED STRIP (adds visual rhythm, breaks monotony) */}
-        <section className="mt-14 ring-1 ring-black/10 bg-white/60">
+        {/* FEATURED STRIP */}
+        <section className="mt-14 ring-1 ring-black/10 bg-white">
           <div className="grid gap-0 md:grid-cols-12">
             <div className="relative h-[220px] md:h-[260px] md:col-span-5 overflow-hidden">
               <Image
@@ -204,8 +194,9 @@ export default function CommercialDesignPage() {
                 alt="Featured commercial design"
                 fill
                 className="object-cover"
+                priority
               />
-              <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/10 to-black/35" />
+              <div className="absolute inset-0 bg-gradient-to-b from-black/0 via-black/0 to-black/20" />
             </div>
 
             <div className="p-7 md:p-10 md:col-span-7">
@@ -223,47 +214,19 @@ export default function CommercialDesignPage() {
                 </span>
               </p>
 
-              <div className="mt-6 flex flex-wrap gap-3">
+              <div className="mt-6">
                 <Link
                   href="/construction"
                   className="inline-flex items-center gap-2 text-sm font-semibold text-black/80 underline underline-offset-4"
                 >
-                  How we build → 
-                </Link>
-                <Link
-                  href="/design"
-                  className="inline-flex items-center gap-2 text-sm font-semibold text-black/80 underline underline-offset-4"
-                >
-                  Back to Design → 
+                  How we build →
                 </Link>
               </div>
             </div>
           </div>
         </section>
 
-        {/* NEXT STEP CTA */}
-        <section className="mt-14 border-t border-black/10 pt-10">
-          <div className="ring-1 ring-black/10 bg-white/60 p-7 md:p-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-            <div>
-              <div className="text-[11px] tracking-[0.35em] uppercase text-black/55">
-                Next step
-              </div>
-              <h4 className="mt-2 text-xl md:text-2xl font-semibold tracking-tight text-black/90">
-                Start with a landscape design consultation.
-              </h4>
-              <p className="mt-3 text-sm md:text-[15px] leading-relaxed text-black/70">
-                Tell us what you want the site to do. We’ll outline a clear plan and next steps.
-              </p>
-            </div>
-
-            <Link
-              href="/contact"
-              className="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-white bg-black/85 hover:bg-black transition"
-            >
-              Contact Us Now
-            </Link>
-          </div>
-        </section>
+        {/* No local bottom CTA here (StandardBottomCTA is global) */}
       </div>
     </PageShell>
   );

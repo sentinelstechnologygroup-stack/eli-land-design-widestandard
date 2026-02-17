@@ -23,11 +23,8 @@ export default function StandardBottomCTA({
   note,
 }: StandardBottomCTAProps) {
   return (
-    <section className="bg-[#F5F1EA]">
-      {/* top rule (matches page rhythm) */}
-      <div className="border-t border-black/10" />
-
-      <div className="mx-auto w-full max-w-6xl px-4 py-12 md:py-14">
+    <section className="bg-transparent">
+      <div className="mx-auto w-full max-w-6xl px-4 py-10 md:py-12">
         <div className="bg-white/70 border border-black/10 shadow-[0_10px_30px_-26px_rgba(0,0,0,0.35)]">
           <div className="grid gap-6 md:grid-cols-12 items-center p-6 md:p-10">
             {/* Copy */}
@@ -76,9 +73,6 @@ export default function StandardBottomCTA({
               </div>
             </div>
           </div>
-
-          {/* bottom micro-rule for “finished” feel */}
-          <div className="border-t border-black/10" />
         </div>
       </div>
     </section>

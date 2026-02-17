@@ -28,53 +28,24 @@ const DOWNLOADS = {
   brochure: "/projects/downloads/eli-land-design-brochure.pdf",
 } as const;
 
-// Home-aligned editorial tokens (warm-light, thin borders, minimal elevation)
+// Home-aligned editorial tokens (warm-light, thin borders, REAL elevation)
 const page = "bg-[#F5F1EA] text-[#151515]";
 const wrap = "mx-auto w-full max-w-6xl px-4";
 const section = "py-10 md:py-14";
-const rule = "border-t border-black/10";
-const card =
-  "bg-white/70 border border-black/10 shadow-[0_8px_30px_-24px_rgba(0,0,0,0.35)]";
-const tile =
-  "bg-white/60 border border-black/10 shadow-[0_6px_22px_-20px_rgba(0,0,0,0.28)]";
 
-const kicker = "text-[11px] tracking-[0.18em] uppercase text-black/60 font-semibold";
+// Floating panels (stronger shadow, still tasteful)
+const card =
+  "bg-white/70 border border-black/10 shadow-[0_34px_110px_-80px_rgba(0,0,0,0.55)]";
+const tile =
+  "bg-white/60 border border-black/10 shadow-[0_26px_90px_-70px_rgba(0,0,0,0.45)]";
+
+// Micro text styles
+const kicker =
+  "text-[11px] tracking-[0.18em] uppercase text-black/60 font-semibold";
 const h1 = "text-3xl md:text-5xl font-semibold tracking-tight";
 const h2 = "text-2xl md:text-3xl font-semibold tracking-tight";
 const h3 = "text-lg md:text-xl font-semibold tracking-tight";
 const body = "text-[15px] md:text-base leading-relaxed text-black/75";
-
-type StripProps = {
-  label: string;
-  imageSrc: string;
-};
-
-function Strip({ label, imageSrc }: StripProps) {
-  return (
-    <div className="relative overflow-hidden border border-black/10">
-      <img
-        src={imageSrc}
-        alt={label}
-        loading="lazy"
-        className="h-[110px] md:h-[140px] w-full object-cover"
-      />
-      <div className="absolute inset-0 bg-black/35" />
-      <div className="absolute inset-0 flex items-center">
-        <div className="mx-auto w-full max-w-6xl px-4">
-          <div className="inline-flex items-center gap-3">
-            <div className="h-7 w-[3px] bg-white/80" />
-            <div className="text-white">
-              <div className="text-[11px] tracking-[0.18em] uppercase font-semibold text-white/80">
-                Section
-              </div>
-              <div className="text-xl md:text-2xl font-semibold tracking-tight">{label}</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 type DownloadRowProps = {
   title: string;
@@ -85,7 +56,12 @@ function DownloadRow({ title, href }: DownloadRowProps) {
   return (
     <a
       href={href}
-      className="group flex items-center justify-between border border-black/10 bg-white/60 px-4 py-3 hover:bg-white/80 transition"
+      className={
+        "group flex items-center justify-between " +
+        "border border-black/10 bg-white/60 px-4 py-3 " +
+        "shadow-[0_18px_70px_-60px_rgba(0,0,0,0.35)] " +
+        "hover:bg-white/80 transition"
+      }
     >
       <div>
         <div className="text-sm font-semibold text-black/85">{title}</div>
@@ -111,13 +87,19 @@ export default function About() {
             LANDSCAPE ARCHITECTS & CONTRACTORS
           </h1>
           <p className={`${body} mt-4`}>
-            Since 1997, E.L.I. land design has approached outdoor environments as part of the
-            architecture — planned, detailed, and executed as a cohesive whole.
+            Since 1997, E.L.I. land design has approached outdoor environments as
+            part of the architecture — planned, detailed, and executed as a
+            cohesive whole.
           </p>
         </div>
 
         <div className="mt-8">
-          <div className="overflow-hidden border border-black/10 bg-white/40">
+          <div
+            className={
+              "overflow-hidden border border-black/10 bg-white/40 " +
+              "shadow-[0_34px_110px_-80px_rgba(0,0,0,0.55)]"
+            }
+          >
             <img
               src={ASSETS.hero}
               alt="ELI Land Design"
@@ -127,16 +109,6 @@ export default function About() {
           </div>
         </div>
       </div>
-
-      <div className={rule} />
-
-      {/* STRIPS */}
-      <div className={`${wrap} ${section} space-y-4`}>
-        <Strip label="Design" imageSrc={ASSETS.aboutMain} />
-        <Strip label="Construction" imageSrc={ASSETS.aboutMain} />
-      </div>
-
-      <div className={rule} />
 
       {/* ABOUT BLOCK */}
       <div className={`${wrap} ${section}`}>
@@ -152,16 +124,19 @@ export default function About() {
             </div>
             <div className="md:col-span-7 p-6 md:p-8">
               <div className={kicker}>Who we are</div>
-              <h2 className={`${h2} mt-2`}>A unified team for planning, design, and execution</h2>
+              <h2 className={`${h2} mt-2`}>
+                A unified team for planning, design, and execution
+              </h2>
               <p className={`${body} mt-4`}>
-                E.L.I. land design was founded in 1997 with a simple goal: raise the standard for
-                landscape work by combining strong design thinking with build-ready documentation and
-                disciplined construction.
+                E.L.I. land design was founded in 1997 with a simple goal: raise
+                the standard for landscape work by combining strong design
+                thinking with build-ready documentation and disciplined
+                construction.
               </p>
               <p className={`${body} mt-4`}>
-                Our process reduces handoffs and protects design intent — resulting in outdoor spaces
-                that feel cohesive, durable, and aligned with the architecture and the character of
-                the site.
+                Our process reduces handoffs and protects design intent —
+                resulting in outdoor spaces that feel cohesive, durable, and
+                aligned with the architecture and the character of the site.
               </p>
               <p className={`${body} mt-4`}>We look forward to meeting you.</p>
             </div>
@@ -173,7 +148,8 @@ export default function About() {
             <div className={kicker}>Approach</div>
             <div className={`${h3} mt-2`}>Design clarity</div>
             <p className={`${body} mt-2`}>
-              Concept, circulation, and composition that hold together as a complete plan.
+              Concept, circulation, and composition that hold together as a
+              complete plan.
             </p>
           </div>
           <div className={`${tile} p-5`}>
@@ -187,22 +163,23 @@ export default function About() {
             <div className={kicker}>Outcome</div>
             <div className={`${h3} mt-2`}>Accountable execution</div>
             <p className={`${body} mt-2`}>
-              Design intent carried through — so the finished site matches the vision.
+              Design intent carried through — so the finished site matches the
+              vision.
             </p>
           </div>
         </div>
       </div>
 
-      <div className={rule} />
-
       {/* TEAM */}
       <div className={`${wrap} ${section}`}>
         <div className="max-w-3xl">
           <div className={kicker}>Our team</div>
-          <h2 className={`${h2} mt-2`}>Hands-on leadership from design through construction</h2>
+          <h2 className={`${h2} mt-2`}>
+            Hands-on leadership from design through construction
+          </h2>
           <p className={`${body} mt-3`}>
-            Experienced, detail-oriented, and accountable — the work is personal to the people
-            leading it.
+            Experienced, detail-oriented, and accountable — the work is personal
+            to the people leading it.
           </p>
         </div>
 
@@ -221,13 +198,16 @@ export default function About() {
                 <div className={kicker}>Founder</div>
                 <h3 className={`${h3} mt-2`}>Chris K. Eiseman, RLA</h3>
                 <p className={`${body} mt-4`}>
-                  Chris founded E.L.I. land design in 1997 and has built a reputation for honesty,
-                  quality craftsmanship, and design leadership that carries through to the final
-                  build.
+                  Chris founded E.L.I. land design in 1997 and has built a
+                  reputation for honesty, quality craftsmanship, and design
+                  leadership that carries through to the final build.
                 </p>
                 <p className={`${body} mt-4`}>
                   Contact:{" "}
-                  <a className="underline text-black/80 hover:text-black" href="mailto:chris@elilanddesign.com">
+                  <a
+                    className="underline text-black/80 hover:text-black"
+                    href="mailto:chris@elilanddesign.com"
+                  >
                     chris@elilanddesign.com
                   </a>
                 </p>
@@ -249,8 +229,9 @@ export default function About() {
                 <div className={kicker}>Registered Landscape Architect</div>
                 <h3 className={`${h3} mt-2`}>Matt Louderback, RLA</h3>
                 <p className={`${body} mt-4`}>
-                  Matt joined E.L.I. land design in 2012 and supports the full project lifecycle —
-                  design, documentation, and visual communication that helps clients and builders align.
+                  Matt joined E.L.I. land design in 2012 and supports the full
+                  project lifecycle — design, documentation, and visual
+                  communication that helps clients and builders align.
                 </p>
               </div>
             </div>
@@ -258,34 +239,41 @@ export default function About() {
         </div>
       </div>
 
-      <div className={rule} />
-
       {/* DOWNLOADS */}
       <div className={`${wrap} ${section}`}>
         <div className="grid gap-8 md:grid-cols-12">
           <div className="md:col-span-5">
             <div className={kicker}>Downloads</div>
             <h2 className={`${h2} mt-2`}>Project pages and brochure</h2>
-            <p className={`${body} mt-3`}>
-              Local PDFs packaged with this build.
-            </p>
+            <p className={`${body} mt-3`}>Local PDFs packaged with this build.</p>
           </div>
 
           <div className="md:col-span-7">
             <div className="space-y-3">
-              <DownloadRow title="Woodhaven Village — Project Page" href={DOWNLOADS.woodhaven} />
-              <DownloadRow title="Vargos — Project Page" href={DOWNLOADS.vargos} />
-              <DownloadRow title="Southfork — Project Page" href={DOWNLOADS.southfork} />
-              <DownloadRow title="Ten Oaks — Project Page" href={DOWNLOADS.tenOaks} />
-              <DownloadRow title="ELI Land Design — Brochure" href={DOWNLOADS.brochure} />
+              <DownloadRow
+                title="Woodhaven Village — Project Page"
+                href={DOWNLOADS.woodhaven}
+              />
+              <DownloadRow
+                title="Vargos — Project Page"
+                href={DOWNLOADS.vargos}
+              />
+              <DownloadRow
+                title="Southfork — Project Page"
+                href={DOWNLOADS.southfork}
+              />
+              <DownloadRow
+                title="Ten Oaks — Project Page"
+                href={DOWNLOADS.tenOaks}
+              />
+              <DownloadRow
+                title="ELI Land Design — Brochure"
+                href={DOWNLOADS.brochure}
+              />
             </div>
           </div>
         </div>
       </div>
-
-      <div className={rule} />
-
-      <StandardBottomCTA />
     </div>
   );
 }

@@ -158,8 +158,6 @@ export default function HomePage() {
           </div>
         </PageShell>
       </section>
-
-      <StandardBottomCTA />
     </main>
   );
 }

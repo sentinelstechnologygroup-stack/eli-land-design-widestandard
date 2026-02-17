@@ -13,7 +13,10 @@
   --muted2: rgba(0,0,0,.48);
   --card: rgba(255,255,255,.55);
   --cardBorder: rgba(0,0,0,.08);
-  --shadow: 0 18px 50px -35px rgba(0,0,0,.45);
+  /* Floating elevation (subtle but visible on warm canvas) */
+  --shadow: 0 34px 110px -70px rgba(0,0,0,.55);      /* hero/band */
+  --shadowCard: 0 26px 90px -70px rgba(0,0,0,.45);   /* cards/panels */
+
 }
 
 *{ box-sizing:border-box; }
@@ -148,11 +151,12 @@ img{ display:block; }
   gap: 16px;
 }
 
-.eliCard{
-  display: block;
-  text-decoration: none;
-  background: rgba(255,255,255,0.5);
+.eliAboutCard{
+  margin-top: 10px;
   border: 1px solid var(--cardBorder);
+  background: rgba(255,255,255,0.55);
+  overflow: hidden;
+  box-shadow: var(--shadowCard);
 }
 
 .eliCard__imgWrap{ height: 150px; overflow: hidden; }
