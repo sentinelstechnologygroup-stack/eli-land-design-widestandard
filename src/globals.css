@@ -1,22 +1,93 @@
-/* src/app/globals.css */
+/* location: src/styles/footer.css or globals.css */
 
-/* Utility helpers to avoid inline styles */
-.eliPadNotFound {
-  padding: 28px 0 60px;
+.eliSiteFooter {
+  background: #f2f2f2;
+  padding: 60px 0 30px;
+  font-size: 14px;
+  color: #333;
 }
 
-.eliMt28 {
-  margin-top: 28px;
+.eliSiteFooter__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
 }
 
-.eliMt24 {
-  margin-top: 24px;
+.eliSiteFooter__grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 60px;
 }
 
-.eliMt18 {
-  margin-top: 18px;
+.eliSiteFooter__heading {
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 20px;
 }
 
-.eliMt12 {
-  margin-top: 12px;
+.eliSiteFooter__text {
+  line-height: 1.6;
+}
+
+.eliSiteFooter__linkGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.eliSiteFooter__linkGrid ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.eliSiteFooter__linkGrid li {
+  margin-bottom: 10px;
+}
+
+.eliSiteFooter__linkGrid a {
+  text-decoration: none;
+  color: #333;
+}
+
+.eliSiteFooter__linkGrid a:hover {
+  text-decoration: underline;
+}
+
+.eliSiteFooter__contactBlock {
+  line-height: 1.7;
+}
+
+.eliSiteFooter__contactLine {
+  margin-bottom: 12px;
+}
+
+.eliSiteFooter__contactLine a {
+  color: #333;
+  text-decoration: none;
+}
+
+.eliSiteFooter__contactLine a:hover {
+  text-decoration: underline;
+}
+
+.eliSiteFooter__bottom {
+  border-top: 1px solid #ddd;
+  margin-top: 50px;
+  padding-top: 20px;
+  text-align: left;
+  font-size: 13px;
+  color: #777;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .eliSiteFooter__grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .eliSiteFooter__linkGrid {
+    grid-template-columns: 1fr;
+  }
 }

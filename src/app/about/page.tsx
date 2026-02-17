@@ -1,41 +1,311 @@
-// location: src/app/about/page.tsx
-import type { Metadata } from "next";
-import PageShell from "@/components/PageShell";
+// src/pages/About.jsx
+import React from "react";
+import StandardBottomCTA from "@/components/StandardBottomCTA";
 
-export const metadata: Metadata = {
-  title: "About | ELI Land Design",
-  description:
-    "Learn about ELI Land Design—landscape architecture and construction serving The Woodlands and Houston area.",
-  alternates: { canonical: "/about" },
+/**
+ * ABOUT — MUST MATCH HOME (Editorial / Warm-Light)
+ * ✅ Local-only assets (public/)
+ * ❗ BUILD THESE FILES (place in /public):
+ *
+ * Images:
+ * - /public/images/about/hero.jpg                      (optional; used as a subtle header image)
+ * - /public/images/about/about-main.jpg
+ * - /public/images/about/team-chris.jpg
+ * - /public/images/about/team-matt.jpg
+ * - /public/images/about/project-woodhaven.png
+ * - /public/images/about/project-vargos.png
+ * - /public/images/about/project-southfork.png
+ * - /public/images/about/project-tenoaks.png
+ * - /public/images/about/brochure-cover.jpg
+ *
+ * Downloads (PDFs):
+ * - /public/projects/downloads/woodhaven-village.pdf
+ * - /public/projects/downloads/vargos.pdf
+ * - /public/projects/downloads/southfork.pdf
+ * - /public/projects/downloads/ten-oaks.pdf
+ * - /public/projects/downloads/eli-land-design-brochure.pdf
+ */
+
+const ASSETS = {
+  hero: "/images/about/hero.jpg",
+  aboutMain: "/images/about/about-main.jpg",
+  teamChris: "/images/about/team-chris.jpg",
+  teamMatt: "/images/about/team-matt.jpg",
+
+  woodhavenThumb: "/images/about/project-woodhaven.png",
+  vargosThumb: "/images/about/project-vargos.png",
+  southforkThumb: "/images/about/project-southfork.png",
+  tenOaksThumb: "/images/about/project-tenoaks.png",
+  brochureCover: "/images/about/brochure-cover.jpg",
 };
 
-export default function AboutPage() {
+const DOWNLOADS = {
+  // ✅ NEVER prefix with /public in hrefs. public/ is web root.
+  woodhaven: "/projects/downloads/woodhaven-village.pdf",
+  vargos: "/projects/downloads/vargos.pdf",
+  southfork: "/projects/downloads/southfork.pdf",
+  tenOaks: "/projects/downloads/ten-oaks.pdf",
+  brochure: "/projects/downloads/eli-land-design-brochure.pdf",
+};
+
+// Home-aligned editorial tokens (warm-light, thin borders, minimal elevation)
+// ✅ CORNER RADIUS STANDARD = SQUARED (no rounded-* anywhere in this file)
+const page = "bg-[#F5F1EA] text-[#151515]";
+const wrap = "mx-auto w-full max-w-6xl px-4";
+const section = "py-10 md:py-14";
+const rule = "border-t border-black/10";
+const card =
+  "bg-white/70 border border-black/10 shadow-[0_8px_30px_-24px_rgba(0,0,0,0.35)]";
+const tile =
+  "bg-white/60 border border-black/10 shadow-[0_6px_22px_-20px_rgba(0,0,0,0.28)]";
+
+const kicker = "text-[11px] tracking-[0.18em] uppercase text-black/60 font-semibold";
+const h1 = "text-3xl md:text-5xl font-semibold tracking-tight";
+const h2 = "text-2xl md:text-3xl font-semibold tracking-tight";
+const h3 = "text-lg md:text-xl font-semibold tracking-tight";
+const body = "text-[15px] md:text-base leading-relaxed text-black/75";
+
+function Strip({ label, imageSrc }) {
   return (
-    <PageShell>
-      <div className="eliPage">
-        <h1 className="eliH1">About ELI Land Design</h1>
-        <p className="eliLead">
-          E.L.I. Land Design provides planning, landscape architecture, and landscape
-          construction for residential and commercial properties across The Woodlands /
-          Houston area.
-        </p>
-
-        <div className="eliContent">
-          <h2 className="eliH2">What We Do</h2>
-          <ul className="eliList">
-            <li>Landscape Architecture & Planning</li>
-            <li>Construction Management & Installation</li>
-            <li>Outdoor Living Enhancements</li>
-            <li>Site Coordination & Phased Improvements</li>
-          </ul>
-
-          <h2 className="eliH2">Our Approach</h2>
-          <p>
-            We balance architecture, landscape, client goals, and the natural character of the site to
-            create outdoor spaces that are both functional and inspiring.
-          </p>
+    <div className="relative overflow-hidden border border-black/10">
+      <img
+        src={imageSrc}
+        alt={label}
+        loading="lazy"
+        className="h-[110px] md:h-[140px] w-full object-cover"
+      />
+      <div className="absolute inset-0 bg-black/35" />
+      <div className="absolute inset-0 flex items-center">
+        <div className={`${wrap}`}>
+          <div className="inline-flex items-center gap-3">
+            <div className="h-7 w-[3px] bg-white/80" />
+            <div className="text-white">
+              <div className="text-[11px] tracking-[0.18em] uppercase font-semibold text-white/80">
+                Section
+              </div>
+              <div className="text-xl md:text-2xl font-semibold tracking-tight">{label}</div>
+            </div>
+          </div>
         </div>
       </div>
-    </PageShell>
+    </div>
+  );
+}
+
+function DownloadRow({ title, href }) {
+  return (
+    <a
+      href={href}
+      className="group flex items-center justify-between border border-black/10 bg-white/60 px-4 py-3 hover:bg-white/80 transition"
+    >
+      <div>
+        <div className="text-sm font-semibold text-black/85">{title}</div>
+        <div className="text-xs text-black/55">Open PDF</div>
+      </div>
+      <div className="text-xs font-semibold tracking-wide text-black/60 group-hover:text-black/80">
+        Download →
+      </div>
+    </a>
+  );
+}
+
+export default function About() {
+  return (
+    <div className={page}>
+      {/* TOP HEADER (same vibe as Home: big headline on warm canvas) */}
+      <div className={`${wrap} ${section}`}>
+        <div className="max-w-3xl">
+          <div className={kicker}>About ELI</div>
+          <h1 className={`${h1} mt-3`}>
+            HOUSTON & THE WOODLANDS
+            <br />
+            LANDSCAPE ARCHITECTS & CONTRACTORS
+          </h1>
+          <p className={`${body} mt-4`}>
+            Since 1997, E.L.I. land design has approached outdoor environments as part of the
+            architecture — planned, detailed, and executed as a cohesive whole.
+          </p>
+        </div>
+
+        {/* Optional subtle header image (kept restrained, like Home strips) */}
+        <div className="mt-8">
+          <div className="overflow-hidden border border-black/10 bg-white/40">
+            <img
+              src={ASSETS.hero}
+              alt="ELI Land Design"
+              loading="lazy"
+              className="h-[180px] md:h-[240px] w-full object-cover"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className={rule} />
+
+      {/* STRIPS (match Home’s “Design / Construction” visual rhythm) */}
+      <div className={`${wrap} ${section} space-y-4`}>
+        <Strip label="Design" imageSrc={ASSETS.aboutMain} />
+        <Strip label="Construction" imageSrc={ASSETS.aboutMain} />
+      </div>
+
+      <div className={rule} />
+
+      {/* ABOUT BLOCK (Home-style: light card, image + text) */}
+      <div className={`${wrap} ${section}`}>
+        <div className={`${card} overflow-hidden`}>
+          <div className="grid gap-0 md:grid-cols-12">
+            <div className="md:col-span-5">
+              <img
+                src={ASSETS.aboutMain}
+                alt="About ELI Land Design"
+                loading="lazy"
+                className="h-full min-h-[260px] w-full object-cover"
+              />
+            </div>
+            <div className="md:col-span-7 p-6 md:p-8">
+              <div className={kicker}>Who we are</div>
+              <h2 className={`${h2} mt-2`}>A unified team for planning, design, and execution</h2>
+              <p className={`${body} mt-4`}>
+                E.L.I. land design was founded in 1997 with a simple goal: raise the standard for
+                landscape work by combining strong design thinking with build-ready documentation and
+                disciplined construction.
+              </p>
+              <p className={`${body} mt-4`}>
+                Our process reduces handoffs and protects design intent — resulting in outdoor spaces
+                that feel cohesive, durable, and aligned with the architecture and the character of
+                the site.
+              </p>
+              <p className={`${body} mt-4`}>We look forward to meeting you.</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-8 grid gap-4 md:grid-cols-3">
+          <div className={`${tile} p-5`}>
+            <div className={kicker}>Approach</div>
+            <div className={`${h3} mt-2`}>Design clarity</div>
+            <p className={`${body} mt-2`}>
+              Concept, circulation, and composition that hold together as a complete plan.
+            </p>
+          </div>
+          <div className={`${tile} p-5`}>
+            <div className={kicker}>Deliverable</div>
+            <div className={`${h3} mt-2`}>Buildable documentation</div>
+            <p className={`${body} mt-2`}>
+              Details that support consistency and craftsmanship in the field.
+            </p>
+          </div>
+          <div className={`${tile} p-5`}>
+            <div className={kicker}>Outcome</div>
+            <div className={`${h3} mt-2`}>Accountable execution</div>
+            <p className={`${body} mt-2`}>
+              Design intent carried through — so the finished site matches the vision.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div className={rule} />
+
+      {/* TEAM (Home-style: clean blocks, minimal framing) */}
+      <div className={`${wrap} ${section}`}>
+        <div className="max-w-3xl">
+          <div className={kicker}>Our team</div>
+          <h2 className={`${h2} mt-2`}>Hands-on leadership from design through construction</h2>
+          <p className={`${body} mt-3`}>
+            Experienced, detail-oriented, and accountable — the work is personal to the people
+            leading it.
+          </p>
+        </div>
+
+        <div className="mt-8 space-y-6">
+          {/* Chris */}
+          <div className={`${card} overflow-hidden`}>
+            <div className="grid gap-0 md:grid-cols-12">
+              <div className="md:col-span-5">
+                <img
+                  src={ASSETS.teamChris}
+                  alt="Chris K. Eiseman, RLA"
+                  loading="lazy"
+                  className="h-full min-h-[280px] w-full object-cover"
+                />
+              </div>
+              <div className="md:col-span-7 p-6 md:p-8">
+                <div className={kicker}>Founder</div>
+                <h3 className={`${h3} mt-2`}>Chris K. Eiseman, RLA</h3>
+                <p className={`${body} mt-4`}>
+                  Chris founded E.L.I. land design in 1997 and has built a reputation for honesty,
+                  quality craftsmanship, and design leadership that carries through to the final
+                  build.
+                </p>
+                <p className={`${body} mt-4`}>
+                  Contact:{" "}
+                  <a
+                    className="underline text-black/80 hover:text-black"
+                    href="mailto:chris@elilanddesign.com"
+                  >
+                    chris@elilanddesign.com
+                  </a>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Matt */}
+          <div className={`${card} overflow-hidden`}>
+            <div className="grid gap-0 md:grid-cols-12">
+              <div className="md:col-span-5 md:order-2">
+                <img
+                  src={ASSETS.teamMatt}
+                  alt="Matt Louderback, RLA"
+                  loading="lazy"
+                  className="h-full min-h-[280px] w-full object-cover"
+                />
+              </div>
+              <div className="md:col-span-7 md:order-1 p-6 md:p-8">
+                <div className={kicker}>Registered Landscape Architect</div>
+                <h3 className={`${h3} mt-2`}>Matt Louderback, RLA</h3>
+                <p className={`${body} mt-4`}>
+                  Matt joined E.L.I. land design in 2012 and supports the full project lifecycle —
+                  design, documentation, and visual communication that helps clients and builders
+                  align.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className={rule} />
+
+      {/* DOWNLOADS (Home-style: quiet list, not dark tiles) */}
+      <div className={`${wrap} ${section}`}>
+        <div className="grid gap-8 md:grid-cols-12">
+          <div className="md:col-span-5">
+            <div className={kicker}>Downloads</div>
+            <h2 className={`${h2} mt-2`}>Project pages and brochure</h2>
+            <p className={`${body} mt-3`}>
+              Local PDFs packaged with this build. If any link 404s, BUILD IT by adding the file to
+              <span className="font-semibold"> /public/downloads</span>.
+            </p>
+          </div>
+
+          <div className="md:col-span-7">
+            <div className="space-y-3">
+              <DownloadRow title="Woodhaven Village — Project Page" href={DOWNLOADS.woodhaven} />
+              <DownloadRow title="Vargos — Project Page" href={DOWNLOADS.vargos} />
+              <DownloadRow title="Southfork — Project Page" href={DOWNLOADS.southfork} />
+              <DownloadRow title="Ten Oaks — Project Page" href={DOWNLOADS.tenOaks} />
+              <DownloadRow title="ELI Land Design — Brochure" href={DOWNLOADS.brochure} />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className={rule} />
+
+      {/* STANDARD BOTTOM CTA (shared) */}
+      <StandardBottomCTA />
+    </div>
   );
 }

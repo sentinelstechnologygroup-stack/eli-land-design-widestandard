@@ -1,11 +1,31 @@
+// src/app/page.tsx
 import Link from "next/link";
 import PageShell from "@/components/PageShell";
+import ClientImg from "@/components/ClientImg";
+import StandardBottomCTA from "@/components/StandardBottomCTA";
 
-const IMG = {
-  design: "/images/home/design.jpg",
-  construction: "/images/home/construction.jpg",
-  projects: "/images/home/projects.jpg",
-  about: "/images/home/about.jpg",
+/**
+ * MEDIA STANDARD (LOCKED)
+ * - Disk: public/images/<scope>/<name>.jpg
+ * - Ref:  "/images/<scope>/<name>.jpg"   (NEVER "public/...")
+ * - All media refs live here at top of page.
+ */
+const MEDIA = {
+  images: {
+    design: "/images/home/design.jpg",
+    construction: "/images/home/construction.jpg",
+    projects: "/images/home/projects.jpg",
+    about: "/images/home/about.jpg",
+  },
+} as const;
+
+type BandProps = {
+  title: string;
+  subtitle: string;
+  cta: string;
+  href: string;
+  image: string;
+  tone?: "light" | "dark";
 };
 
 function Band({
@@ -15,18 +35,11 @@ function Band({
   href,
   image,
   tone = "light",
-}: {
-  title: string;
-  subtitle: string;
-  cta: string;
-  href: string;
-  image: string;
-  tone?: "light" | "dark";
-}) {
+}: BandProps) {
   return (
     <Link href={href} className={`eliBand eliBand--${tone}`} aria-label={title}>
       <div className="eliBand__imgWrap">
-        <img className="eliBand__img" src={image} alt="" />
+        <ClientImg className="eliBand__img" src={image} alt="" loading="lazy" />
         <div className="eliBand__overlay" />
       </div>
       <div className="eliBand__content">
@@ -38,23 +51,19 @@ function Band({
   );
 }
 
-function Card({
-  title,
-  subtitle,
-  cta,
-  href,
-  image,
-}: {
+type CardProps = {
   title: string;
   subtitle: string;
   cta: string;
   href: string;
   image: string;
-}) {
+};
+
+function Card({ title, subtitle, cta, href, image }: CardProps) {
   return (
     <Link href={href} className="eliCard" aria-label={title}>
       <div className="eliCard__imgWrap">
-        <img className="eliCard__img" src={image} alt="" />
+        <ClientImg className="eliCard__img" src={image} alt="" loading="lazy" />
       </div>
       <div className="eliCard__body">
         <div className="eliCard__title">{title}</div>
@@ -93,7 +102,7 @@ export default function HomePage() {
             subtitle="Commercial & Residential"
             cta="Explore Design"
             href="/design"
-            image={IMG.design}
+            image={MEDIA.images.design}
             tone="light"
           />
         </PageShell>
@@ -106,7 +115,7 @@ export default function HomePage() {
             subtitle="Execution with precision."
             cta="View Construction"
             href="/construction"
-            image={IMG.construction}
+            image={MEDIA.images.construction}
             tone="light"
           />
         </PageShell>
@@ -124,14 +133,14 @@ export default function HomePage() {
               subtitle="Commercial & Residential"
               cta="Explore Design"
               href="/design"
-              image={IMG.design}
+              image={MEDIA.images.design}
             />
             <Card
               title="CONSTRUCTION"
               subtitle="Execution with precision."
               cta="View Construction"
               href="/construction"
-              image={IMG.projects}
+              image={MEDIA.images.projects}
             />
           </div>
         </PageShell>
@@ -143,7 +152,12 @@ export default function HomePage() {
             <div className="eliAboutRow__left">
               <div className="eliSectionHead__title">ABOUT ELI</div>
               <div className="eliAboutCard">
-                <img className="eliAboutCard__img" src={IMG.about} alt="" />
+                <ClientImg
+                  className="eliAboutCard__img"
+                  src={MEDIA.images.about}
+                  alt=""
+                  loading="lazy"
+                />
               </div>
             </div>
 
@@ -161,6 +175,9 @@ export default function HomePage() {
           </div>
         </PageShell>
       </section>
+
+      {/* STANDARD BOTTOM CTA (shared) */}
+      <StandardBottomCTA />
     </main>
   );
 }

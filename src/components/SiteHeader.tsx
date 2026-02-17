@@ -5,18 +5,12 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
 const nav = [
+  { href: "/", label: "Home" },
   { href: "/about", label: "About" },
-  { href: "/guiding-ideas", label: "Guiding Ideas" },
-  { href: "/design", label: "Design" },
-  { href: "/construction", label: "Construction" },
+  { href: "/design", label: "Landscape Architecture" },
+  { href: "/construction", label: "Landscape Construction" },
+  { href: "/portfolio", label: "Portfolio" },
   { href: "/projects", label: "Projects" },
-];
-
-const contactMenu = [
-  { href: "/contact-us", label: "Contact Us" },
-  { href: "/testimonials", label: "Testimonials" },
-  { href: "/careers-at-eli", label: "Careers at ELI" },
-  { href: "/guiding-ideas", label: "Idea Center" },
 ];
 
 export default function SiteHeader() {
@@ -24,18 +18,20 @@ export default function SiteHeader() {
   const wrapRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const onDoc = (e: MouseEvent) => {
+    function onDocMouseDown(e: MouseEvent) {
       if (!wrapRef.current) return;
       if (!wrapRef.current.contains(e.target as Node)) setOpen(false);
-    };
-    const onEsc = (e: KeyboardEvent) => {
+    }
+
+    function onKeyDown(e: KeyboardEvent) {
       if (e.key === "Escape") setOpen(false);
-    };
-    document.addEventListener("mousedown", onDoc);
-    document.addEventListener("keydown", onEsc);
+    }
+
+    document.addEventListener("mousedown", onDocMouseDown);
+    document.addEventListener("keydown", onKeyDown);
     return () => {
-      document.removeEventListener("mousedown", onDoc);
-      document.removeEventListener("keydown", onEsc);
+      document.removeEventListener("mousedown", onDocMouseDown);
+      document.removeEventListener("keydown", onKeyDown);
     };
   }, []);
 
@@ -54,7 +50,6 @@ export default function SiteHeader() {
             </Link>
           ))}
 
-          {/* Contact dropdown (semantic, no ARIA menu roles) */}
           <div className="eliNav__dropdown" ref={wrapRef}>
             <button
               type="button"
@@ -63,21 +58,29 @@ export default function SiteHeader() {
               aria-expanded={open}
               onClick={() => setOpen((v) => !v)}
             >
-              Contact Us <span className="eliNav__caret">▾</span>
+              Contact Us{" "}
+              <span className="eliNav__caret" aria-hidden="true">
+                ▾
+              </span>
             </button>
 
             {open ? (
-              <div className="eliNav__dropdownPanel" aria-label="Contact links">
-                {contactMenu.map((i) => (
-                  <Link
-                    key={i.href}
-                    href={i.href}
-                    className="eliNav__dropdownItem"
-                    onClick={() => setOpen(false)}
-                  >
-                    {i.label}
-                  </Link>
-                ))}
+              <div className="eliNav__dropdownPanel">
+                <Link
+                  href="/contact-us"
+                  className="eliNav__dropdownLink"
+                  onClick={() => setOpen(false)}
+                >
+                  Contact Page
+                </Link>
+
+                <a className="eliNav__dropdownLink" href="tel:+12812592610">
+                  Call: 281.259.2610
+                </a>
+
+                <a className="eliNav__dropdownLink" href="tel:+12812592622">
+                  Fax: 281.259.2622
+                </a>
               </div>
             ) : null}
           </div>
