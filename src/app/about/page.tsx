@@ -13,11 +13,11 @@ const ASSETS = {
   teamMatt: "/images/about/team-matt.jpg",
 
   // NOTE: Make sure these filenames match what exists in /public/images/about/
-  woodhavenThumb: "/images/about/project-woodhaven.jpg",
-  vargosThumb: "/images/about/project-vargos.jpg",
-  southforkThumb: "/images/about/project-southfork.jpg",
-  tenOaksThumb: "/images/about/project-tenoaks.jpg",
-  brochureCover: "/images/about/brochure-cover.jpg",
+  woodhavenThumb: "/images/about/project-woodhaven.png",
+  vargosThumb: "/images/about/project-vargos.png",
+  southforkThumb: "/images/about/project-southfork.png",
+  tenOaksThumb: "/images/about/project-tenoaks.png",
+  brochureCover: "/images/about/brochure-cover.png",
 } as const;
 
 const DOWNLOADS = {
