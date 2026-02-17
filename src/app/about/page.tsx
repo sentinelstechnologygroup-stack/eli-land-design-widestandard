@@ -32,10 +32,10 @@ const ASSETS = {
   teamChris: "/images/about/team-chris.jpg",
   teamMatt: "/images/about/team-matt.jpg",
 
-  woodhavenThumb: "/images/about/project-woodhaven.png",
-  vargosThumb: "/images/about/project-vargos.png",
-  southforkThumb: "/images/about/project-southfork.png",
-  tenOaksThumb: "/images/about/project-tenoaks.png",
+  woodhavenThumb: "/images/about/project-woodhaven.jpg",
+  vargosThumb: "/images/about/project-vargos.jpg",
+  southforkThumb: "/images/about/project-southfork.jpg",
+  tenOaksThumb: "/images/about/project-tenoaks.jpg",
   brochureCover: "/images/about/brochure-cover.jpg",
 };
 

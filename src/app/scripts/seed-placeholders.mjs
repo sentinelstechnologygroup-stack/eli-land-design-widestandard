@@ -3,9 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 /**
- * STANDARD:
- * - Disk paths: public/images/<scope>/<name>.jpg
- * - Code refs:  "/images/<scope>/<name>.jpg"
+
  *
  * This seeds required placeholder JPGs so dev + CI never break.
  */
